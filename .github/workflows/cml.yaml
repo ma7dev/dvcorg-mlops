@@ -21,6 +21,7 @@ jobs:
           nvidia-smi >> report.md
           echo $CODEBLOCK >> report.md
 
+          source $CONDA_PREFIX/etc/profile.d/conda.sh
           conda activate mlops
           python -m pip install -r requirements.txt
           dvc repro
