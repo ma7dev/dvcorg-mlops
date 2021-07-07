@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import json
 # Set random seed
 seed = 42
 
@@ -31,11 +32,19 @@ train_score = regr.score(X_train, y_train) * 100
 # Report test set score
 test_score = regr.score(X_test, y_test) * 100
 
+# acc = np.mean(y_train==y)
+# tn, fp, fn, tp = confusion_matrix(y, y_train).ravel()
+# specificity = tn / (tn+fp)
+# sensitivity = tp / (tp + fn)
+
 # Write scores to a file
 with open("metrics.txt", 'w') as outfile:
         outfile.write("Training variance explained: %2.1f%%\n" % train_score)
         outfile.write("Test variance explained: %2.1f%%\n" % test_score)
 
+# Now print to file
+with open("metrics.json", 'w') as outfile:
+        json.dump({ "train score": train_score, "test score": test_score}, outfile)
 
 ##########################################
 ##### PLOT FEATURE IMPORTANCE ############
