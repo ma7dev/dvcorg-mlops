@@ -10,13 +10,13 @@ jobs:
       - name: cml_run
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          CODEBLOCK: "\`\`\`"
         run: |
           echo $(which python)
           echo $(which conda)
-          echo ${{ env.CODEBLOCK }} > report.md
+          CODEBLOCK="\`\`\`"
+          echo $CODEBLOCK > report.md
           nvidia-smi >> report.md
-          echo ${{ env.CODEBLOCK }} >> report.md
+          echo $CODEBLOCK >> report.md
 
           conda activate mlops
           python -m pip install -r requirements.txt
